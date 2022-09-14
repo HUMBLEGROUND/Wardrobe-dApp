@@ -14,6 +14,11 @@ function Main() {
       <Link to="/users">
         <div className="btn btn-success">사용자 지갑 생성</div>
       </Link>
+      <br />
+      <br />
+      <Link to="/create">
+        <div className="btn btn-success">자산 생성</div>
+      </Link>
     </div>
   );
 }
