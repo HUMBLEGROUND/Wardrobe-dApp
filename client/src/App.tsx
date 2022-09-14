@@ -15,26 +15,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
-        </Routes>
-        <Routes>
           <Route path="/admin" element={<AdminWallet />} />
-        </Routes>
-        <Routes>
-          <Route path="/admin" element={<UserWallet />} />
-        </Routes>
-        <Routes>
+          <Route path="/users" element={<UserWallet />} />
           <Route path="/create" element={<CreateAsset />} />
-        </Routes>
-        <Routes>
           <Route path="/read" element={<ReadAsset />} />
-        </Routes>
-        <Routes>
           <Route path="/update" element={<UpdateAsset />} />
-        </Routes>
-        <Routes>
           <Route path="/delete" element={<DeleteAsset />} />
-        </Routes>
-        <Routes>
           <Route path="/transfer" element={<TransferAsset />} />
         </Routes>
       </Router>
