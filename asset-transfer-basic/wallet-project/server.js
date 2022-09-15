@@ -17,18 +17,20 @@ const app = express();
 const PORT = 8080;
 const HOST = "0.0.0.0";
 
-app.use(cors());
+app.use(cors()); // cors 에러수정
 
 app.use(express.static(path.join(__dirname, "views")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// 4. "/" GET 라우팅
+//  "/" GET 라우팅
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "index.html");
 });
 
-// 5. /admin POST 라우팅 ( id, password )
+//-----------------------------------
+// 관리자 인증서 발급
+// /admin POST 라우팅 ( id, password )
 app.post("/admin", async (req, res) => {
   const id = req.body.id;
   const pw = req.body.password;
@@ -89,7 +91,9 @@ app.post("/admin", async (req, res) => {
   }
 });
 
-// 6. /user POST 라우팅 ( id, userrole )
+//-----------------------------------
+// 유저 인증서 발급
+// /user POST 라우팅 ( id, userrole )
 app.post("/user", async (req, res) => {
   const id = req.body.id;
   const userrole = req.body.userrole;
@@ -176,6 +180,8 @@ app.post("/user", async (req, res) => {
   }
 });
 
+//-----------------------------------
+// POST (자산생성)
 // post : "/asset" 경로 body(cert / id / color / size / owner / value) 라우팅
 app.post("/asset", async (req, res) => {
   const cert = req.body.cert;
@@ -266,8 +272,10 @@ app.post("/asset", async (req, res) => {
   }
 });
 
+//-----------------------------------
+// /asset GET (자산조회)
 // get : "/asset" 경로 query (cert / id / color / size / owner / value) 라우팅
-// post 는 body로 오지만 get은 query로 온다
+// ⭐ post 는 body로 오지만 ⭐ get은 query로 온다
 app.get("/asset", async (req, res) => {
   const cert = req.query.cert;
   const id = req.query.id;
@@ -339,6 +347,123 @@ app.get("/asset", async (req, res) => {
   }
 });
 
+//-----------------------------------
+//  /update POST (자산변경)
+app.post("/update", async (req, res) => {
+  const cert = req.body.cert;
+  const id = req.body.id;
+  const color = req.body.color;
+  const size = req.body.size;
+  const owner = req.body.owner;
+  const value = req.body.value;
+  console.log(
+    "/update-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value
+  );
+
+  // Create a new file system based wallet for managing identities.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Wallet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identity for the user does not exists in the wallet`);
+    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("mychannel");
+
+  // Get the contract from the network.
+  const contract = network.getContract("basic");
+
+  // Submit the specified transaction.
+  console.log("\n--> Submit Transaction: UpdateAsset asset");
+  await contract.submitTransaction(
+    "UpdateAsset",
+    id,
+    color,
+    size,
+    owner,
+    value
+  );
+  console.log("Transaction(UpdateAsset) has been submitted");
+
+  // response -> client
+  await gateway.disconnect();
+  const resultPath = path.join(process.cwd(), "/views/result.html");
+  var resultHTML = fs.readFileSync(resultPath, "utf-8");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<div><p>Transaction(UpdateAsset) has been submitted</p></div>"
+  );
+  res.status(200).send(resultHTML);
+});
+
+//-----------------------------------
+//  /delete POST (자산삭제)
+app.post("/delete", async (req, res) => {
+  const cert = req.body.cert;
+  const id = req.body.id;
+  console.log("/delete-post-" + id);
+
+  // Create a new file system based wallet for managing identities.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Wallet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identity for the user does not exists in the wallet`);
+    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("mychannel");
+
+  // Get the contract from the network.
+  const contract = network.getContract("basic");
+
+  // Submit the specified transaction.
+  console.log("\n--> Submit Transaction: UpdateAsset asset");
+  await contract.submitTransaction("DeleteAsset", id);
+  console.log("Transaction(UpdateAsset) has been submitted");
+
+  // response -> client
+  await gateway.disconnect();
+  const resultPath = path.join(process.cwd(), "/views/result.html");
+  var resultHTML = fs.readFileSync(resultPath, "utf-8");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<div><p>Transaction(DeleteAsset) has been submitted</p></div>"
+  );
+  res.status(200).send(resultHTML);
+});
+
+//-----------------------------------
+//  /assets GET (모든자산조회)
 app.get("/assets", async (req, res) => {
   const cert = req.query.cert;
   console.log(cert);
@@ -407,7 +532,55 @@ app.get("/assets", async (req, res) => {
   }
 });
 
-// 7. server 시작
+//-----------------------------------
+//  /transfer POST (소유주변경)
+app.post("/transfer", async (req, res) => {
+  const cert = req.body.cert;
+  const id = req.body.id;
+  const owner = req.body.owner;
+  console.log("/transfer-post-" + owner);
+
+  // Create a new file system based wallet for managing identities.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Wallet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identity for the user does not exists in the wallet`);
+    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("mychannel");
+
+  // Get the contract from the network.
+  const contract = network.getContract("basic");
+
+  // Submit the specified transaction.
+  console.log("\n--> Submit Transaction: UpdateAsset asset");
+  await contract.submitTransaction("TransferAsset", id, owner);
+  console.log("Transaction(TransferAsset) has been submitted");
+
+  // response -> client
+  await gateway.disconnect();
+  const res_str = `{"result":"success","msg":"Transaction(TransferAsset) has been submitted"}`;
+  res.status(200).json(JSON.parse(res_str));
+});
+
+//-----------------------------------
+// server 시작
 app.listen(PORT, HOST, function () {
   console.log(`Running on http://${HOST}:${PORT}`);
 });
