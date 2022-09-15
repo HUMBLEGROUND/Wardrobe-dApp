@@ -19,6 +19,11 @@ function Main() {
       <Link to="/create">
         <div className="btn btn-success">자산 생성</div>
       </Link>
+      <br />
+      <br />
+      <Link to="/delete">
+        <div className="btn btn-danger">자산 삭제</div>
+      </Link>
     </div>
   );
 }
