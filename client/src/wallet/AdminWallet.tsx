@@ -22,7 +22,7 @@ function AdminWallet() {
     };
     console.log(body);
     axios
-      .post("http://localhost:8080/user/", body)
+      .post("http://localhost:8080/admin/", body)
       .then(res => console.log(res));
   };
 

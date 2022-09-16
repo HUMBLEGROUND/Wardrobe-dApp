@@ -17,12 +17,17 @@ function Main() {
       <br />
       <br />
       <Link to="/create">
-        <div className="btn btn-success">자산 생성</div>
+        <div className="btn btn-primary">자산 생성</div>
       </Link>
       <br />
       <br />
       <Link to="/delete">
         <div className="btn btn-danger">자산 삭제</div>
+      </Link>
+      <br />
+      <br />
+      <Link to="/read">
+        <div className="btn btn-success">자산 조회</div>
       </Link>
     </div>
   );
