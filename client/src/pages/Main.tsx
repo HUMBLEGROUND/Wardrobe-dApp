@@ -29,6 +29,16 @@ function Main() {
       <Link to="/read">
         <div className="btn btn-success">자산 조회</div>
       </Link>
+      <br />
+      <br />
+      <Link to="/transfer">
+        <div className="btn btn-success">자산 전송</div>
+      </Link>
+      <br />
+      <br />
+      <Link to="/update">
+        <div className="btn btn-success">자산 변경</div>
+      </Link>
     </div>
   );
 }
