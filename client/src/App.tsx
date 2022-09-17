@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Main from "./pages/Main";
-import AdminWallet from "./wallet/AdminWallet";
 import UserWallet from "./wallet/UserWallet";
 import CreateAsset from "./asset/CreateAsset";
 import ReadAsset from "./asset/ReadAsset";
@@ -16,7 +15,6 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/admin" element={<AdminWallet />} />
           <Route path="/users" element={<UserWallet />} />
           <Route path="/create" element={<CreateAsset />} />
           <Route path="/read" element={<ReadAsset />} />

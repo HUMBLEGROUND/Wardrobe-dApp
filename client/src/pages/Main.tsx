@@ -1,7 +1,22 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/Main.css";
 
 function Main() {
+  const id = "admin";
+  const password = "adminpw";
+
+  const onClickAdminCert = () => {
+    let body = {
+      id,
+      password,
+    };
+    console.log(body);
+    axios
+      .post("http://localhost:8080/admin/", body)
+      .then(res => console.log(res));
+  };
+
   return (
     <div className="main_wrapper">
       <div className="main_container">
@@ -13,9 +28,9 @@ function Main() {
             블록체인을 이용하여 중고거래를 기록하세요!
           </div>
           <div className="main_content">
-            <Link to="/admin">
-              <div className="main_admin_btn">권한등록</div>
-            </Link>
+            <div className="main_admin_btn" onClick={onClickAdminCert}>
+              권한등록
+            </div>
             <Link to="/users">
               <div className="main_user_btn">옷장등록</div>
             </Link>
@@ -28,26 +43,10 @@ function Main() {
             width="550"
             height="550"
             alt=""
-            // 👆 메인 페이지에 판매중인 이미지 띄우기
           />
         </div>
       </div>
     </div>
-    // <div className="main_container">
-    //   <div className="main_wrapper">
-    //     <div className="main_text">
-    //       <img src="closet.jpg" className="main_background-img" />
-    //       <div className="title">Welcome to Simple Asset Transfer Basic !</div>
-    //       <div className="description ">
-    //         자산관리 사이트에 오신것을 환영합니다!
-    //       </div>
-
-    //       <Link to="/admin">
-    //         <div className="btn btn-danger">관리자 지갑 생성</div>
-    //       </Link>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
