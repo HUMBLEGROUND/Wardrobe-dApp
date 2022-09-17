@@ -1,0 +1,17 @@
+.nav_wrapper {
+  z-index: 1;
+  background-color: #f5f5f5;
+}
+
+.nav_title {
+  font-weight: 600;
+  padding-left: 2rem;
+}
+
+.nav_gap {
+  gap: 3rem;
+}
+
+.nav_btn {
+  margin-bottom: 2px;
+}

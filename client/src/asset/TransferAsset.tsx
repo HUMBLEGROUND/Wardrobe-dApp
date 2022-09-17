@@ -4,7 +4,7 @@ import axios from "axios";
 function TransferAsset() {
   const [certValue, setCertValue] = useState<any>("");
   const [idValue, setIdValue] = useState<any>("");
-  const [ownerValue, setOwnerValue] = useState("");
+  const [ownerValue, setOwnerValue] = useState<any>("");
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
@@ -29,7 +29,7 @@ function TransferAsset() {
     };
     console.log(body);
     axios
-      .post("http://localhost:8080/asset/", body)
+      .post("http://localhost:8080/transfer/", body)
       .then(res => console.log(res));
     console.log(body);
   };
