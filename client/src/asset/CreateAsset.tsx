@@ -1,15 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import "../styles/CreateAsset.css";
 
 function CreateAsset() {
-  // const [body, setBody] = useState<{}>({
-  //   cert: "",
-  //   id: "",
-  //   color: "",
-  //   size: "",
-  //   owner: "",
-  //   value: "",
-  // });
   const [certValue, setCertValue] = useState("");
   const [idValue, setIdValue] = useState("");
   const [colorValue, setColerValue] = useState("");
@@ -47,11 +40,6 @@ function CreateAsset() {
     console.log(value);
   };
 
-  // const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setBody((e.target as HTMLInputElement).value);
-  //   console.log(body);
-  // };
-
   const onClickCreateAsset = () => {
     let body = {
       cert: certValue,
@@ -69,75 +57,49 @@ function CreateAsset() {
   };
 
   return (
-    <div className="container">
-      <br />
-      <h1>자산생성페이지</h1>
-      <p>자산생성에 필요한 정보를 입력하세요!</p>
-      <br />
+    <div className="create_wrapper">
+      <div className="create_container">
+        <br />
+        <div className="create_title">옷 등록하기</div>
+        <div className="create_description">
+          옷장에서 꺼내서 나온 정보를 입력하세요!
+        </div>
+        <br />
 
-      <label className="form-label">인증서이름</label>
-      <br />
-      <input
-        type="text"
-        name="cert"
-        className="form-control"
-        onChange={onChangeCert}
-      />
-      <br />
+        <label className="form-label">내 아이디</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeCert} />
+        <br />
 
-      <label className="form-label">자산이름</label>
-      <br />
-      <input
-        type="text"
-        name="id"
-        className="form-control"
-        onChange={onChangeId}
-      />
-      <br />
+        <label className="form-label">등록할 의류 이름</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeId} />
+        <br />
 
-      <label className="form-label">색상</label>
-      <br />
-      <input
-        type="text"
-        name="color"
-        className="form-control"
-        onChange={onChangeColor}
-      />
-      <br />
+        <label className="form-label">색상</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeColor} />
+        <br />
 
-      <label className="form-label">크기</label>
-      <br />
-      <input
-        type="text"
-        name="size"
-        className="form-control"
-        onChange={onChangeSize}
-      />
-      <br />
+        <label className="form-label">사이즈</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeSize} />
+        <br />
 
-      <label className="form-label">소유주</label>
-      <br />
-      <input
-        type="text"
-        name="owner"
-        className="form-control"
-        onChange={onChangeOwner}
-      />
-      <br />
+        <label className="form-label">소유주 아이디</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeOwner} />
+        <br />
 
-      <label className="form-label">금액(자산값)</label>
-      <br />
-      <input
-        type="text"
-        name="value"
-        className="form-control"
-        onChange={onChangeValue}
-      />
-      <br />
+        <label className="form-label">금액</label>
+        <br />
+        <input type="text" className="form-control" onChange={onChangeValue} />
+        <br />
 
-      <button className="btn btn-primary" onClick={onClickCreateAsset}>
-        관리자인증서생성
-      </button>
+        <button className="btn btn-primary" onClick={onClickCreateAsset}>
+          옷등록하기
+        </button>
+      </div>
     </div>
   );
 }

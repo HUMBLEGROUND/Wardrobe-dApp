@@ -11,7 +11,7 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .main_text {
@@ -76,4 +76,19 @@
 .main_user_btn:hover {
   background-color: #27572f;
   cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .main_bg {
+    width: 450px;
+    height: 450px;
+  }
+
+  .main_title {
+    font-size: 2rem;
+  }
+
+  .main_description {
+    font-size: 1.4rem;
+  }
 }

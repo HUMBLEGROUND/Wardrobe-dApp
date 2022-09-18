@@ -1,20 +1,38 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/Main.css";
+import Swal from "sweetalert2";
 
 function Main() {
   const id = "admin";
   const password = "adminpw";
 
-  const onClickAdminCert = () => {
+  const onClickAdminCert = async () => {
     let body = {
       id,
       password,
     };
     console.log(body);
-    axios
-      .post("http://localhost:8080/admin/", body)
-      .then(res => console.log(res));
+    let adminCert = await axios.post("http://localhost:8080/admin/", body);
+    if (adminCert.data.result === "failed") {
+      Swal.fire({
+        title: "이미 등록되어있습니다!",
+        text: "옷을 등록하세요 🥼 👖",
+        icon: "warning",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#198754",
+      });
+    } else {
+      Swal.fire({
+        title: "권한 등록 완료!",
+        text: "옷을 등록하세요 🥼 👖",
+        icon: "success",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#198754",
+      });
+    }
+    // ⭐ Promise<pending> Error 해결
+    // 👉 async/await 나 then 둘중에 하나만 사용해야한다!
   };
 
   return (
