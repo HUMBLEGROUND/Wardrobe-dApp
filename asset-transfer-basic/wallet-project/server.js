@@ -190,8 +190,10 @@ app.post("/asset", async (req, res) => {
   const size = req.body.size;
   const owner = req.body.owner;
   const value = req.body.value;
+  const maker = req.body.maker;
+  const year = req.body.year;
 
-  console.log(cert, id, color, size, owner, value);
+  console.log(cert, id, color, size, owner, value, maker, year);
 
   try {
     // load the network configuration
@@ -211,7 +213,7 @@ app.post("/asset", async (req, res) => {
         'An identity for the user "appUser" does not exist in the wallet'
       );
       console.log("Run the registerUser.js application before retrying");
-      const res_str = `An identity for the user "${cert}" does not exist in the wallet`;
+      const res_str = `noCert`;
       res.send(res_str);
 
       return;
@@ -243,8 +245,12 @@ app.post("/asset", async (req, res) => {
       color,
       size,
       owner,
-      value
+      value,
+      maker,
+      year
     );
+    const res_str = `success`;
+    res.send(res_str);
     console.log("Transaction has been submitted");
 
     // Disconnect from the gateway.
@@ -252,25 +258,22 @@ app.post("/asset", async (req, res) => {
 
     // const res_str = `Transaction has been submitted`;
     // res.send(res_str)
-
-    const resultPath = path.join(process.cwd(), "/views/result.html");
-    // 해당경로 현재 폴더에 있는 파일을 join
-    var resultHTML = fs.readFileSync(resultPath, "utf-8");
-    // 파일을 다 읽고 결과가 나올때까지 기다려준다
-
-    resultHTML = resultHTML.replace(
-      "<dir></dir>",
-      "<div><p>Transaction(CreateAsset) has been submitted</p></div>"
-    );
-    // 내가 원하는부분의 코드를 원하는 값으로 replace 해준다
-    // 앞 (기존코드) 👉 뒤 (바꾸고자하는 코드)
-    res.send(resultHTML);
   } catch (error) {
-    console.error(`Failed to submit transaction: ${error}`);
-    const res_str = `Failed to submit transaction: ${error}`;
+    console.error(
+      `{"result":"failed","msg":"Failed to submit transaction: ${error}"}`
+    );
+    const res_str = {
+      result: "failed",
+      msg: "Failed to submit transaction: ${error}",
+    };
     res.send(res_str);
+    res.json(JSON.parse(res_str));
   }
 });
+// console.error(`Failed to submit transaction: ${error}`);
+
+// const res_str = `{"result":"failed","msg":"Failed to submit transaction: ${error}"}`;
+// res.json(JSON.parse(res_str));
 
 //-----------------------------------
 // /asset GET (자산조회)
@@ -402,13 +405,6 @@ app.post("/update", async (req, res) => {
 
   // response -> client
   await gateway.disconnect();
-  const resultPath = path.join(process.cwd(), "/views/result.html");
-  var resultHTML = fs.readFileSync(resultPath, "utf-8");
-  resultHTML = resultHTML.replace(
-    "<dir></dir>",
-    "<div><p>Transaction(UpdateAsset) has been submitted</p></div>"
-  );
-  res.status(200).send(resultHTML);
 });
 
 //-----------------------------------
@@ -453,13 +449,6 @@ app.post("/delete", async (req, res) => {
 
   // response -> client
   await gateway.disconnect();
-  const resultPath = path.join(process.cwd(), "/views/result.html");
-  var resultHTML = fs.readFileSync(resultPath, "utf-8");
-  resultHTML = resultHTML.replace(
-    "<dir></dir>",
-    "<div><p>Transaction(DeleteAsset) has been submitted</p></div>"
-  );
-  res.status(200).send(resultHTML);
 });
 
 //-----------------------------------
