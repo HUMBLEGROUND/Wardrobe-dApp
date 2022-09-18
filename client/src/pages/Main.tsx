@@ -16,16 +16,16 @@ function Main() {
     let adminCert = await axios.post("http://localhost:8080/admin/", body);
     if (adminCert.data.result === "failed") {
       Swal.fire({
-        title: "이미 등록되어있습니다!",
-        text: "옷을 등록하세요 🥼 👖",
+        title: "이미 등록되어있습니다 !",
+        text: "옷장을 등록하세요 ! 🚪",
         icon: "warning",
         confirmButtonText: "확인",
-        confirmButtonColor: "#198754",
+        confirmButtonColor: "#910",
       });
     } else {
       Swal.fire({
-        title: "권한 등록 완료!",
-        text: "옷을 등록하세요 🥼 👖",
+        title: "권한 등록 완료 !",
+        text: "옷장을 등록하세요 ! 🚪",
         icon: "success",
         confirmButtonText: "확인",
         confirmButtonColor: "#198754",
@@ -40,10 +40,10 @@ function Main() {
       <div className="main_container">
         <div className="main_text">
           <div className="main_title">
-            나의 옷장에서 옷을 꺼내서 등록 해보세요!
+            나의 옷장에서 옷을 꺼내서 등록 해보세요 !
           </div>
           <div className="main_description">
-            블록체인을 이용하여 중고거래를 기록하세요!
+            블록체인을 이용하여 중고거래를 기록하세요 !
           </div>
           <div className="main_content">
             <div className="main_admin_btn" onClick={onClickAdminCert}>
