@@ -108,22 +108,22 @@ function CreateAsset() {
       <br />
       <Row>
         <Col>
-          <Label className="form-label">옷장 별명 (아이디)</Label>
+          <Label>옷장 별명 (아이디)</Label>
           <input type="text" className="form-control" onChange={onChangeCert} />
           <br />
-          <Label className="form-label">등록할 의류 이름 (종류)</Label>
+          <Label>등록할 의류 이름 (종류)</Label>
           <input type="text" className="form-control" onChange={onChangeId} />
           <br />
         </Col>
         <Col>
-          <Label className="form-label">옷 주인 이름</Label>
+          <Label>옷 주인 이름</Label>
           <input
             type="text"
             className="form-control"
             onChange={onChangeOwner}
           />
           <br />
-          <Label className="form-label">제조사 (메이커)</Label>
+          <Label>제조사 (메이커)</Label>
           <input
             type="text"
             className="form-control"
@@ -134,14 +134,14 @@ function CreateAsset() {
       </Row>
       <Row>
         <Col>
-          <Label className="form-label">사이즈</Label>
+          <Label>사이즈</Label>
           <input
             type="number"
             className="form-control"
             onChange={onChangeSize}
           />
           <br />
-          <Label className="form-label">구매 연도</Label>
+          <Label>구매 연도</Label>
           <input
             type="number"
             className="form-control"
@@ -150,14 +150,14 @@ function CreateAsset() {
           <br />
         </Col>
         <Col>
-          <Label className="form-label">색상</Label>
+          <Label>색상</Label>
           <input
             type="text"
             className="form-control"
             onChange={onChangeColor}
           />
           <br />
-          <Label className="form-label">금액</Label>
+          <Label>금액</Label>
           <input
             type="number"
             className="form-control"
