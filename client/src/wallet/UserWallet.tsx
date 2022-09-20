@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import "../styles/UserWallet.css";
 import Swal from "sweetalert2";
+import { Container, Title, Description, Label } from "../styles/Container";
 
 function UserWallet() {
   const [idValue, setIdValue] = useState<any>("");
@@ -40,15 +40,15 @@ function UserWallet() {
   };
 
   return (
-    <div className="user_container">
+    <Container top="40%">
       <br />
-      <div className="user_title">옷장등록 (회원가입)</div>
-      <div className="user_description">
+      <Title color="#198754;">옷장등록 (회원가입)</Title>
+      <Description borderBottom="3px solid #198754">
         옷을 등록하기 위해 내 옷장을 등록하세요 !
-      </div>
+      </Description>
       <br />
       <br />
-      <label className="form-label">옷장 별명 (아이디)</label>
+      <Label>옷장 별명 (아이디)</Label>
       <input
         type="text"
         className="form-control"
@@ -59,7 +59,7 @@ function UserWallet() {
       <button className="btn btn-success" onClick={onClickUserCert}>
         옷장 등록하기
       </button>
-    </div>
+    </Container>
   );
 }
 

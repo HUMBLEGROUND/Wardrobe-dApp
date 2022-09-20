@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { Container, Title, Description, Label } from "../styles/Container";
 
 function DeleteAsset() {
   const [certValue, setCertValue] = useState("");
@@ -15,40 +17,57 @@ function DeleteAsset() {
     console.log(idValue);
   };
 
-  const onClickDeleteAsset = () => {
+  const onClickDeleteAsset = async () => {
     let body = {
       cert: certValue,
       id: idValue,
     };
     console.log(body);
-    axios
-      .post("http://localhost:8080/delete/", body)
-      .then(res => console.log(res));
+    let closetDelete = await axios.post("http://localhost:8080/delete/", body);
+
+    if (closetDelete.data === "noCert") {
+      Swal.fire({
+        title: "등록 되지 않은 별명입니다 !",
+        text: "옷장 별명을 다시 확인해주세요 !",
+        icon: "error",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#dc3545",
+      });
+    } else {
+      Swal.fire({
+        title: "옷 삭제 완료 !",
+        icon: "success",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#dc3545",
+      });
+    }
+    console.log(closetDelete);
   };
 
   return (
-    <div className="container">
+    <Container top="45%">
       <br />
-      <h1>자산삭제페이지</h1>
-      <p>자산조회에 필요한 정보를 입력하시오</p>
+      <Title color="#dc3545">옷 기록삭제</Title>
+      <Description borderBottom="3px solid #dc3545">
+        등록된 옷중에 삭제할 옷을 입력하세요!
+      </Description>
       <br />
-      <label className="form-label"> 인증서이름 </label>
       <br />
+      <Label>옷장 별명 (아이디)</Label>
       <input
         type="text"
         className="form-control"
         onChange={onChangeCertValue}
       />
       <br />
-      <label className="form-label"> 자산이름 </label>
-      <br />
+      <Label>등록된 의류 이름 (종류)</Label>
       <input type="text" className="form-control" onChange={onChangeIdValue} />
       <br />
       <br />
       <div className="btn btn-danger" onClick={onClickDeleteAsset}>
         자산 삭제
       </div>
-    </div>
+    </Container>
   );
 }
 

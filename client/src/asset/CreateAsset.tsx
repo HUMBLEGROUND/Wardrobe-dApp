@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import "../styles/CreateAsset.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Swal from "sweetalert2";
+import { Container, Title, Description, Label } from "../styles/Container";
 
 function CreateAsset() {
   const [certValue, setCertValue] = useState("");
@@ -98,94 +98,79 @@ function CreateAsset() {
   };
 
   return (
-    <div className="create_wrapper">
-      <div className="create_container">
-        <br />
-        <div className="create_title">옷 등록하기</div>
-        <div className="create_description">
-          옷장에서 꺼내서 나온 정보를 입력하세요!
-        </div>
-        <br />
-        <br />
-        <Row>
-          <Col>
-            <label className="form-label">옷장 별명 (아이디)</label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              onChange={onChangeCert}
-            />
-            <br />
-            <label className="form-label">등록할 의류 이름 (종류)</label>
-            <br />
-            <input type="text" className="form-control" onChange={onChangeId} />
-            <br />
-          </Col>
-          <Col>
-            <label className="form-label">옷 주인 이름</label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              onChange={onChangeOwner}
-            />
-            <br />
-            <label className="form-label">제조사 (메이커)</label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              onChange={onChangeMaker}
-            />
-            <br />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <label className="form-label">사이즈</label>
-            <br />
-            <input
-              type="number"
-              className="form-control"
-              onChange={onChangeSize}
-            />
-            <br />
-
-            <label className="form-label">구매 연도</label>
-            <br />
-            <input
-              type="number"
-              className="form-control"
-              onChange={onChangeYear}
-            />
-            <br />
-          </Col>
-          <Col>
-            <label className="form-label">색상</label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              onChange={onChangeColor}
-            />
-            <br />
-            <label className="form-label">금액</label>
-            <br />
-            <input
-              type="number"
-              className="form-control"
-              onChange={onChangeValue}
-            />
-            <br />
-          </Col>
-        </Row>
-        <br />
-        <button className="btn btn-primary" onClick={onClickCreateAsset}>
-          옷 등록하기
-        </button>
-      </div>
-    </div>
+    <Container top="50%">
+      <br />
+      <Title color="#0d6efd">옷 등록하기</Title>
+      <Description borderBottom="3px solid #0d6efd;">
+        옷장에서 꺼내서 나온 정보를 입력하세요!
+      </Description>
+      <br />
+      <br />
+      <Row>
+        <Col>
+          <Label className="form-label">옷장 별명 (아이디)</Label>
+          <input type="text" className="form-control" onChange={onChangeCert} />
+          <br />
+          <Label className="form-label">등록할 의류 이름 (종류)</Label>
+          <input type="text" className="form-control" onChange={onChangeId} />
+          <br />
+        </Col>
+        <Col>
+          <Label className="form-label">옷 주인 이름</Label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={onChangeOwner}
+          />
+          <br />
+          <Label className="form-label">제조사 (메이커)</Label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={onChangeMaker}
+          />
+          <br />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Label className="form-label">사이즈</Label>
+          <input
+            type="number"
+            className="form-control"
+            onChange={onChangeSize}
+          />
+          <br />
+          <Label className="form-label">구매 연도</Label>
+          <input
+            type="number"
+            className="form-control"
+            onChange={onChangeYear}
+          />
+          <br />
+        </Col>
+        <Col>
+          <Label className="form-label">색상</Label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={onChangeColor}
+          />
+          <br />
+          <Label className="form-label">금액</Label>
+          <input
+            type="number"
+            className="form-control"
+            onChange={onChangeValue}
+          />
+          <br />
+        </Col>
+      </Row>
+      <br />
+      <button className="btn btn-primary" onClick={onClickCreateAsset}>
+        옷 등록하기
+      </button>
+    </Container>
   );
 }
 
