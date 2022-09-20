@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { Container, Title, Description, Label } from "../styles/Container";
 
 function TransferAsset() {
   const [certValue, setCertValue] = useState<any>("");
@@ -21,38 +23,56 @@ function TransferAsset() {
     console.log(ownerValue);
   };
 
-  const onClickTransferAsset = () => {
+  const onClickTransferAsset = async () => {
     let body = {
       cert: certValue,
       id: idValue,
       owner: ownerValue,
     };
     console.log(body);
-    axios
-      .post("http://localhost:8080/transfer/", body)
-      .then(res => console.log(res));
+    let closetSale = await axios.post("http://localhost:8080/transfer/", body);
     console.log(body);
+
+    if (closetSale.data.result === "failed") {
+      Swal.fire({
+        title: "등록 되지 않은 별명입니다 !",
+        text: "옷장 별명을 다시 확인해주세요 !",
+        icon: "error",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#910",
+      });
+    } else {
+      Swal.fire({
+        title: "옷 판매 완료 ! 👕 🩳",
+        text: "옷 주인이 변경되었습니다 !",
+        icon: "success",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#212529",
+      });
+    }
+
+    console.log(closetSale);
   };
 
   return (
-    <div className="container">
+    <Container top="50%">
       <br />
-      <h1>소유주변경페이지</h1>
-      <p>소유주변경에 필요한 정보를 입력하시오</p>
+      <Title color="#212529">옷 판매하기</Title>
+      <Description color="#555" borderBottom="3px solid #212529">
+        등록된 옷중에 판매할 옷을 입력하세요!
+      </Description>
+      <br />
       <br />
 
-      <label className="form-label"> 인증서이름 </label>
-      <br />
+      <Label>옷장 별명 (아이디)</Label>
       <input type="text" className="form-control" onChange={onChangeCert} />
       <br />
 
-      <label className="form-label"> 자산이름 </label>
-      <br />
+      <Label>등록된 의류 이름 (종류)</Label>
       <input type="text" className="form-control" onChange={onChangeId} />
       <br />
 
-      <label className="form-label"> 변경소유주 </label>
-      <br />
+      <Label>변경될 주인 이름</Label>
       <input
         type="text"
         id="owner"
@@ -63,10 +83,10 @@ function TransferAsset() {
 
       <br />
       <br />
-      <button className="btn btn-danger" onClick={onClickTransferAsset}>
-        소유주변경
+      <button className="btn btn-dark" onClick={onClickTransferAsset}>
+        옷 판매하기
       </button>
-    </div>
+    </Container>
   );
 }
 

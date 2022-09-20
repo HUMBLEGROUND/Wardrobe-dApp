@@ -84,7 +84,7 @@ function UpdateAsset() {
       <br />
       <Title color="#0dcaf0">옷 정보 수정</Title>
       <Description color="#555" borderBottom="3px solid #0dcaf0">
-        등록된 옷중에 수정할 정보를 입력하세요! <br />
+        등록된 옷중에 수정할 정보를 입력하세요!
         <Description color="#0dcaf0">
           수정되지 않는 정보도 다 입력해야 적용됩니다
         </Description>
