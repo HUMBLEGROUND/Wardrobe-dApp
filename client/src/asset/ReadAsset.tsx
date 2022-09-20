@@ -1,18 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { Container, Title, Description, Label } from "../styles/Container";
 
 function ReadAsset() {
   const [certValue, setCertValue] = useState<any>("");
-  const [idValue, setIdValue] = useState<any>("");
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
     console.log(certValue);
-  };
-
-  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIdValue((e.target as HTMLInputElement).value);
-    console.log(idValue);
   };
 
   const onClickAssetRead = () => {
@@ -20,43 +15,28 @@ function ReadAsset() {
       .get("http://localhost:8080/assets/", {
         params: {
           cert: certValue,
-          id: idValue,
         },
       })
       .then(res => console.log(res));
   };
 
-  const onClickAssetAllRead = () => {
-    let cert = certValue;
-    console.log(cert);
-    axios
-      .get("http://localhost:8080/assets/", cert)
-      .then(res => console.log(res));
-  };
-
   return (
-    <div className="container">
+    <Container top="40%">
       <br />
-      <h1>자산조회페이지</h1>
-      <p>자산조회에 필요한 정보를 입력하시오</p>
+      <Title color="#ffc107">옷 목록 조회</Title>
+      <Description color="#555" borderBottom="3px solid #ffc107">
+        등록된 모든 옷을 조회 해보세요!
+      </Description>
       <br />
-
-      <label className="form-label"> 인증서이름 </label>
       <br />
+      <Label>옷장 별명 (아이디)</Label>
       <input type="text" className="form-control" onChange={onChangeCert} />
       <br />
-      <label className="form-label"> 자산이름 </label>
       <br />
-      <input type="text" className="form-control" onChange={onChangeId} />
-      <br />
-      <br />
-      <button className="btn btn-primary" onClick={onClickAssetRead}>
-        자산조회
+      <button className="btn btn-warning" onClick={onClickAssetRead}>
+        옷 목록 조회
       </button>
-      <button className="btn btn-warning" onClick={onClickAssetAllRead}>
-        모든자산조회
-      </button>
-    </div>
+    </Container>
   );
 }
 
