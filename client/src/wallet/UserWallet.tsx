@@ -43,7 +43,7 @@ function UserWallet() {
     <Container top="40%">
       <br />
       <Title color="#198754;">옷장등록 (회원가입)</Title>
-      <Description borderBottom="3px solid #198754">
+      <Description color="#555" borderBottom="3px solid #198754">
         옷을 등록하기 위해 내 옷장을 등록하세요 !
       </Description>
       <br />

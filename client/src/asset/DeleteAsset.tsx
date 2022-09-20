@@ -47,7 +47,7 @@ function DeleteAsset() {
     <Container top="45%">
       <br />
       <Title color="#dc3545">옷 기록삭제</Title>
-      <Description borderBottom="3px solid #dc3545">
+      <Description color="#555" borderBottom="3px solid #dc3545">
         등록된 옷중에 삭제할 옷을 입력하세요!
       </Description>
       <br />

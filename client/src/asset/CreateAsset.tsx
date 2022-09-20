@@ -101,7 +101,7 @@ function CreateAsset() {
     <Container top="50%">
       <br />
       <Title color="#0d6efd">옷 등록하기</Title>
-      <Description borderBottom="3px solid #0d6efd;">
+      <Description color="#555" borderBottom="3px solid #0d6efd;">
         옷장에서 꺼내서 나온 정보를 입력하세요!
       </Description>
       <br />

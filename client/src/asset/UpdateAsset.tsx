@@ -83,8 +83,11 @@ function UpdateAsset() {
     <Container top="50%">
       <br />
       <Title color="#0dcaf0">옷 정보 수정</Title>
-      <Description borderBottom="3px solid #0dcaf0">
-        등록된 옷중에 수정할 정보를 입력하세요!
+      <Description color="#555" borderBottom="3px solid #0dcaf0">
+        등록된 옷중에 수정할 정보를 입력하세요! <br />
+        <Description color="#0dcaf0">
+          수정되지 않는 정보도 다 입력해야 적용됩니다
+        </Description>
       </Description>
       <br />
       <br />
@@ -93,7 +96,7 @@ function UpdateAsset() {
           <Label>옷장 별명 (아이디)</Label>
           <input type="text" className="form-control" onChange={onChangeCert} />
           <br />
-          <Label>등록할 의류 이름 (종류)</Label>
+          <Label>등록된 의류 이름 (종류)</Label>
           <input type="text" className="form-control" onChange={onChangeId} />
           <br />
         </Col>

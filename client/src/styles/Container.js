@@ -15,7 +15,7 @@ export const Title = styled.div`
 `;
 
 export const Description = styled.div`
-  color: #555;
+  color: ${props => props.color};
   max-width: 500px;
   font-size: 1.2rem;
   border-bottom: ${props => props.borderBottom};

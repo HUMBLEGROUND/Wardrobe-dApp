@@ -359,6 +359,8 @@ app.post("/update", async (req, res) => {
   const size = req.body.size;
   const owner = req.body.owner;
   const value = req.body.value;
+  const maker = req.body.maker;
+  const year = req.body.year;
   console.log(
     "/update-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value
   );
@@ -399,9 +401,15 @@ app.post("/update", async (req, res) => {
     color,
     size,
     owner,
-    value
+    value,
+    maker,
+    year
   );
   console.log("Transaction(UpdateAsset) has been submitted");
+
+  const res_str = `success`;
+  res.send(res_str);
+  console.log("Transaction has been submitted");
 
   // response -> client
   await gateway.disconnect();
