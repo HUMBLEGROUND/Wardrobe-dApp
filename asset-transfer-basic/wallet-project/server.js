@@ -414,41 +414,61 @@ app.post("/delete", async (req, res) => {
   const id = req.body.id;
   console.log("/delete-post-" + id);
 
-  // Create a new file system based wallet for managing identities.
-  const walletPath = path.join(process.cwd(), "wallet");
-  const wallet = await Wallets.newFileSystemWallet(walletPath);
-  console.log(`Wallet path: ${walletPath}`);
+  try {
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), "wallet");
+    const wallet = await Wallets.newFileSystemWallet(walletPath);
+    console.log(`Wallet path: ${walletPath}`);
 
-  // Check to see if we've already enrolled the admin user.
-  const identity = await wallet.get(cert);
-  if (!identity) {
-    console.log(`An identity for the user does not exists in the wallet`);
-    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+    // Check to see if we've already enrolled the admin user.
+    const identity = await wallet.get(cert);
+    // form 에서 작성된 cert 가져오기 체크(인증서 이름)
+    if (!identity) {
+      console.log(
+        'An identity for the user "appUser" does not exist in the wallet'
+      );
+      console.log("Run the registerUser.js application before retrying");
+      const res_str = `noCert`;
+      res.send(res_str);
+
+      return;
+    }
+
+    // Create a new gateway for connecting to our peer node.
+    const gateway = new Gateway();
+    await gateway.connect(ccp, {
+      wallet,
+      identity: cert,
+      discovery: { enabled: true, asLocalhost: true },
+    });
+
+    // Get the network (channel) our contract is deployed to.
+    const network = await gateway.getNetwork("mychannel");
+
+    // Get the contract from the network.
+    const contract = network.getContract("basic");
+
+    // Submit the specified transaction.
+    console.log("\n--> Submit Transaction: UpdateAsset asset");
+    await contract.submitTransaction("DeleteAsset", id);
+
+    const res_str = `success`;
+    res.send(res_str); // 클라이언트에 else 조건 반응주기
+    console.log("Transaction has been submitted");
+
+    // response -> client
+    await gateway.disconnect();
+  } catch (error) {
+    console.error(
+      `{"result":"failed","msg":"Failed to submit transaction: ${error}"}`
+    );
+    const res_str = {
+      result: "failed",
+      msg: "Failed to submit transaction: ${error}",
+    };
+    res.send(res_str);
     res.json(JSON.parse(res_str));
-    return;
   }
-
-  // Create a new gateway for connecting to our peer node.
-  const gateway = new Gateway();
-  await gateway.connect(ccp, {
-    wallet,
-    identity: cert,
-    discovery: { enabled: true, asLocalhost: true },
-  });
-
-  // Get the network (channel) our contract is deployed to.
-  const network = await gateway.getNetwork("mychannel");
-
-  // Get the contract from the network.
-  const contract = network.getContract("basic");
-
-  // Submit the specified transaction.
-  console.log("\n--> Submit Transaction: UpdateAsset asset");
-  await contract.submitTransaction("DeleteAsset", id);
-  console.log("Transaction(UpdateAsset) has been submitted");
-
-  // response -> client
-  await gateway.disconnect();
 });
 
 //-----------------------------------

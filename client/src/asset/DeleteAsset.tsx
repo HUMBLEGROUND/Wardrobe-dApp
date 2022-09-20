@@ -41,7 +41,6 @@ function DeleteAsset() {
         confirmButtonColor: "#dc3545",
       });
     }
-    console.log(closetDelete);
   };
 
   return (
