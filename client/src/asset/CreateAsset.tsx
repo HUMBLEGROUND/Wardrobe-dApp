@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Swal from "sweetalert2";
 import { Container, Title, Description, Label } from "../styles/Container";
+import Form from "react-bootstrap/Form";
 
 function CreateAsset() {
   const [certValue, setCertValue] = useState("");
@@ -14,6 +15,7 @@ function CreateAsset() {
   const [value, setValue] = useState<number>();
   const [makerValue, setMakerValue] = useState<string>();
   const [yearValue, setYearValue] = useState<number>();
+  const [imageUrl, setImageUrl] = useState<any>(null);
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
@@ -55,6 +57,23 @@ function CreateAsset() {
     console.log(yearValue);
   };
 
+  const imgRef = useRef<any>();
+  const onChangeImage = () => {
+    const reader = new FileReader();
+    const file = imgRef.current.files[0];
+    console.log(file);
+
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImageUrl(reader.result);
+      console.log("이미지주소", reader.result);
+    };
+  };
+
+  const onClickFileBtn = () => {
+    imgRef.current.click();
+  };
+
   const onClickCreateAsset = async () => {
     let body = {
       cert: certValue,
@@ -65,6 +84,7 @@ function CreateAsset() {
       value: value,
       maker: makerValue,
       year: yearValue,
+      image: imageUrl,
     };
     console.log(body);
 
@@ -163,6 +183,34 @@ function CreateAsset() {
             className="form-control"
             onChange={onChangeValue}
           />
+          <br />
+        </Col>
+        <Col>
+          <Label>옷 사진</Label>
+          <Form.Group controlId="formFile" className="mb-3">
+            <img
+              src={imageUrl ? imageUrl : "profile.jpg"}
+              width="70"
+              height="70"
+              alt=""
+            />
+            <br />
+            <input
+              type="file"
+              ref={imgRef}
+              onChange={onChangeImage}
+              style={{ display: "none" }}
+            />
+            <br />
+            <button
+              onClick={() => {
+                onClickFileBtn();
+              }}
+              style={{ borderRadius: "5px", float: "left" }}
+            >
+              사진 업로드
+            </button>
+          </Form.Group>
           <br />
         </Col>
       </Row>
