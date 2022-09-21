@@ -21,6 +21,7 @@ type Asset struct {
 	AppraisedValue int    `json:"appraisedValue"`
 	Maker          string `json:"maker"`
 	Year           int    `json:"year"`
+	Image          string `json:"image"`
 }
 
 // InitLedger adds a base set of assets to the ledger
@@ -50,7 +51,7 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 }
 
 // CreateAsset issues a new asset to the world state with given details.
-func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int, maker string, year int) error {
+func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int, maker string, year int, image string) error {
 	exists, err := s.AssetExists(ctx, id)
 	if err != nil {
 		return err
@@ -67,6 +68,7 @@ func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface,
 		AppraisedValue: appraisedValue,
 		Maker: 					maker,
 		Year:						year, 
+		Image:          image,
 	}
 	assetJSON, err := json.Marshal(asset)
 	if err != nil {
@@ -96,8 +98,7 @@ func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, i
 }
 
 // UpdateAsset updates an existing asset in the world state with provided parameters.
-// 등록된 옷 수정기능
-func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int, maker string, year int) error {
+func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int, maker string, year int, image string) error {
 	exists, err := s.AssetExists(ctx, id)
 	if err != nil {
 		return err
@@ -115,6 +116,7 @@ func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface,
 		AppraisedValue: appraisedValue,
 		Maker: 					maker,
 		Year:						year,
+		Image:          image,
 	}
 	assetJSON, err := json.Marshal(asset)
 	if err != nil {
