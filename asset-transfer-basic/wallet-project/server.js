@@ -17,6 +17,12 @@ const app = express();
 const PORT = 8080;
 const HOST = "0.0.0.0";
 
+app.use(bodyParser.json({ limit: 5000000 }));
+// 에러코드 413 👉 PayloadTooLargeError: request entity too large
+// Node.js에서 bodyParser는 아래와 같이 기본으로 100kb까지 저장가능
+// 5MB 로 용량을 늘려준다
+// 👉 이미지파일이 담길공간
+
 app.use(cors()); // cors 에러수정
 
 app.use(express.static(path.join(__dirname, "views")));
@@ -192,8 +198,9 @@ app.post("/asset", async (req, res) => {
   const value = req.body.value;
   const maker = req.body.maker;
   const year = req.body.year;
+  const image = req.body.image;
 
-  console.log(cert, id, color, size, owner, value, maker, year);
+  console.log(cert, id, color, size, owner, value, maker, year, image);
 
   try {
     // load the network configuration
@@ -247,7 +254,8 @@ app.post("/asset", async (req, res) => {
       owner,
       value,
       maker,
-      year
+      year,
+      image
     );
     const res_str = `success`;
     res.send(res_str);
@@ -361,6 +369,8 @@ app.post("/update", async (req, res) => {
   const value = req.body.value;
   const maker = req.body.maker;
   const year = req.body.year;
+  const image = req.body.image;
+
   console.log(
     "/update-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value
   );
@@ -403,7 +413,8 @@ app.post("/update", async (req, res) => {
     owner,
     value,
     maker,
-    year
+    year,
+    image
   );
   console.log("Transaction(UpdateAsset) has been submitted");
 
