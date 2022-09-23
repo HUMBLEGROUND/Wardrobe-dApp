@@ -90,6 +90,7 @@ function ReadAsset() {
             owner={list.owner}
             size={list.size}
             year={list.year}
+            image={list.image}
           />
         )}
       </Table>

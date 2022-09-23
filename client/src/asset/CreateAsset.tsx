@@ -141,6 +141,7 @@ function CreateAsset() {
             type="text"
             className="form-control"
             onChange={onChangeOwner}
+            style={{ width: "200px" }}
           />
           <br />
           <Label>제조사 (메이커)</Label>
@@ -148,6 +149,7 @@ function CreateAsset() {
             type="text"
             className="form-control"
             onChange={onChangeMaker}
+            style={{ width: "200px" }}
           />
           <br />
         </Col>
@@ -206,7 +208,14 @@ function CreateAsset() {
               onClick={() => {
                 onClickFileBtn();
               }}
-              style={{ borderRadius: "5px", float: "left" }}
+              style={{
+                backgroundColor: "#0d6efd",
+                borderRadius: "5px",
+                borderColor: "#0d6efd",
+                color: "#fff",
+                padding: "3px",
+                float: "left",
+              }}
             >
               사진 업로드
             </button>

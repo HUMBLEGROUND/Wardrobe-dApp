@@ -8,6 +8,7 @@ export interface ListProps {
   owner: string;
   size: number;
   year: number;
+  image: string;
 }
 
 const ReadList: FC<ListProps> = ({
@@ -18,9 +19,14 @@ const ReadList: FC<ListProps> = ({
   owner,
   size,
   year,
+  image,
 }) => {
   return (
     <tbody>
+      <tr>
+        <th>옷 사진</th>
+        <img src={image} width="100" height="70" alt="" />
+      </tr>
       <tr>
         <th>옷 주인 이름</th>
         <td>{owner}</td>
