@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fwavescats%2FWardrobe-dApp&count_bg=%233D8EC8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Wardrobe&edge_flat=false)](https://hits.seeyoufarm.com)
 
-## Available Scripts
+</div>
 
-In the project directory, you can run:
+## Toy프로젝트 
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🚪 프로젝트 명 '옷장'
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<div align="center">
 
-### `npm test`
+![](https://velog.velcdn.com/images/-__-/post/31f4cc21-76f4-4022-9f5c-632d56b448bc/image.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</div>
 
-### `npm run build`
+**‘옷장’** 은 프라이빗 블록체인을 (하이퍼레저 패브릭) 이용한 토이프로젝트 입니다
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+나의 옷장에 있는 옷들의<br>
+색상, 사이즈, 메이커 등 상세정보를 입력하고 <br>
+사진을 찍어 **블록체인에 기록** 할 수 있습니다<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](https://velog.velcdn.com/images/-__-/post/383e23cd-50c0-4cdb-b95a-b3bd3dec4993/image.png)
 
-### `npm run eject`
+***
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🧬 아키텍처 설계
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<div align="center">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src="https://velog.velcdn.com/images/-__-/post/a6f5f4e9-a3af-4c28-8956-a3115e7a9153/image.png"  width="800" height="450"/>
 
-## Learn More
+</div>   
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+***
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
+
+### 🎥 시연 영상
+
+<br>
+
+https://wavescats.github.io/project/2022/09/23/pj4.html<br>
+<br>
+(👆 시연 영상 참고)
