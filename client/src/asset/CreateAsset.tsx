@@ -7,7 +7,7 @@ import { Container, Title, Description, Label } from "../styles/Container";
 import Form from "react-bootstrap/Form";
 
 function CreateAsset() {
-  const [certValue, setCertValue] = useState("");
+  const [certValue, setCertValue] = useState<string>("");
   const [idValue, setIdValue] = useState<string>("");
   const [colorValue, setColerValue] = useState<string>("");
   const [sizeValue, setSizeValue] = useState<number>();
@@ -19,54 +19,44 @@ function CreateAsset() {
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
-    console.log(certValue);
   };
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdValue((e.target as HTMLInputElement).value);
-    console.log(idValue);
   };
 
   const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColerValue((e.target as HTMLInputElement).value);
-    console.log(colorValue);
   };
 
   const onChangeSize = (e: { target: { value: string } }): void => {
     setSizeValue(Number(e.target.value));
-    console.log(sizeValue);
   };
 
   const onChangeOwner = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerValue((e.target as HTMLInputElement).value);
-    console.log(ownerValue);
   };
 
   const onChangeValue = (e: { target: { value: string } }): void => {
     setValue(Number(e.target.value));
-    console.log(value);
   };
 
   const onChangeMaker = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMakerValue((e.target as HTMLInputElement).value);
-    console.log(makerValue);
   };
 
   const onChangeYear = (e: { target: { value: string } }): void => {
     setYearValue(Number(e.target.value));
-    console.log(yearValue);
   };
 
   const imgRef = useRef<any>();
   const onChangeImage = () => {
     const reader = new FileReader();
     const file = imgRef.current.files[0];
-    console.log(file);
 
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImageUrl(reader.result);
-      console.log("이미지주소", reader.result);
     };
   };
 
@@ -86,7 +76,6 @@ function CreateAsset() {
       year: yearValue,
       image: imageUrl,
     };
-    console.log(body);
 
     let closetAdd = await axios.post("http://localhost:8080/asset/", body);
 
@@ -114,7 +103,6 @@ function CreateAsset() {
         confirmButtonColor: "#0d6efd",
       });
     }
-    console.log(closetAdd);
   };
 
   return (

@@ -4,23 +4,20 @@ import Swal from "sweetalert2";
 import { Container, Title, Description, Label } from "../styles/Container";
 
 function TransferAsset() {
-  const [certValue, setCertValue] = useState<any>("");
-  const [idValue, setIdValue] = useState<any>("");
-  const [ownerValue, setOwnerValue] = useState<any>("");
+  const [certValue, setCertValue] = useState<string>("");
+  const [idValue, setIdValue] = useState<string>("");
+  const [ownerValue, setOwnerValue] = useState<string>("");
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
-    console.log(certValue);
   };
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdValue((e.target as HTMLInputElement).value);
-    console.log(idValue);
   };
 
   const onChangeOwner = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerValue((e.target as HTMLInputElement).value);
-    console.log(ownerValue);
   };
 
   const onClickTransferAsset = async () => {
@@ -29,9 +26,7 @@ function TransferAsset() {
       id: idValue,
       owner: ownerValue,
     };
-    console.log(body);
     let closetSale = await axios.post("http://localhost:8080/transfer/", body);
-    console.log(body);
 
     if (closetSale.data.result === "failed") {
       Swal.fire({
@@ -50,8 +45,6 @@ function TransferAsset() {
         confirmButtonColor: "#212529",
       });
     }
-
-    console.log(closetSale);
   };
 
   return (

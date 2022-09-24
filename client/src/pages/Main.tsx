@@ -12,7 +12,7 @@ function Main() {
       id,
       password,
     };
-    console.log(body);
+
     let adminCert = await axios.post("http://localhost:8080/admin/", body);
     if (adminCert.data.result === "failed") {
       Swal.fire({
@@ -43,7 +43,7 @@ function Main() {
             나의 옷장에서 옷을 꺼내서 등록 해보세요 !
           </div>
           <div className="main_description">
-            블록체인을 이용하여 중고거래를 기록하세요 !
+            블록체인을 이용하여 옷 정보를 기록해보세요 !
           </div>
           <div className="main_content">
             <div className="main_admin_btn" onClick={onClickAdminCert}>

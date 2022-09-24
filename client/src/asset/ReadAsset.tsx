@@ -5,19 +5,17 @@ import ReadList from "../pages/ReadList";
 import { Table } from "react-bootstrap";
 
 function ReadAsset() {
-  const [certValue, setCertValue] = useState<any>("");
-  const [idValue, setIdValue] = useState<any>("");
-  const [response, setResponse] = useState<any>("failed");
+  const [certValue, setCertValue] = useState<string>("");
+  const [idValue, setIdValue] = useState<string>("");
+  const [response, setResponse] = useState<string>("failed");
   const [list, setList] = useState<any>([]);
 
   const onChangeCert = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
-    console.log(certValue);
   };
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdValue((e.target as HTMLInputElement).value);
-    console.log(idValue);
   };
 
   const onClickAssetRead = () => {
@@ -37,10 +35,6 @@ function ReadAsset() {
         }
       });
   };
-
-  console.log(response);
-
-  console.log(list);
 
   return (
     <Container top="50%">

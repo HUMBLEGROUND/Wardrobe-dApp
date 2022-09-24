@@ -4,17 +4,15 @@ import Swal from "sweetalert2";
 import { Container, Title, Description, Label } from "../styles/Container";
 
 function DeleteAsset() {
-  const [certValue, setCertValue] = useState("");
-  const [idValue, setIdValue] = useState("");
+  const [certValue, setCertValue] = useState<string>("");
+  const [idValue, setIdValue] = useState<string>("");
 
   const onChangeCertValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertValue((e.target as HTMLInputElement).value);
-    console.log(certValue);
   };
 
   const onChangeIdValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdValue((e.target as HTMLInputElement).value);
-    console.log(idValue);
   };
 
   const onClickDeleteAsset = async () => {
@@ -22,7 +20,6 @@ function DeleteAsset() {
       cert: certValue,
       id: idValue,
     };
-    console.log(body);
     let closetDelete = await axios.post("http://localhost:8080/delete/", body);
 
     if (closetDelete.data === "noCert") {
