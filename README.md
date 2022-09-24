@@ -24,7 +24,7 @@
 
 <br>
 
-![](https://velog.velcdn.com/images/-__-/post/383e23cd-50c0-4cdb-b95a-b3bd3dec4993/image.png)
+![image](https://user-images.githubusercontent.com/97342533/192098815-e63bef14-51fe-4c22-861b-096f4e36972a.png)
 
 ***
 
@@ -34,7 +34,7 @@
 
 <div align="center">
 
-<img src="https://velog.velcdn.com/images/-__-/post/a6f5f4e9-a3af-4c28-8956-a3115e7a9153/image.png"  width="800" height="450"/>
+![image](https://user-images.githubusercontent.com/97342533/192088538-4b5c1a48-4add-47ac-9346-fd88d84c7339.png)
 
 </div>   
 
